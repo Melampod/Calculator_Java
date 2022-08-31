@@ -25,10 +25,10 @@ public class Main {
             default -> 0;
         };
         if (numberSystem.equals("Roman")) {
-            if (intAnswer >= 0)
+            if (intAnswer > 0)
                 strAnswer = arabicToRoman(intAnswer);
             else
-                throw new CalcInputException("Невозможно представить ответ \"" + intAnswer + "\" в римской системе счисления, т.к. в ней нет отрицательных чисел.");
+                throw new CalcInputException("Невозможно представить ответ \"" + intAnswer + "\" в римской системе счисления, т.к. в ней нет отрицательных чисел, а также числа \"0\".");
         }
         else
             strAnswer = String.valueOf(intAnswer);
@@ -49,18 +49,18 @@ public class Main {
 
     public static String arabicToRoman(int number){
         int num = 0;
-        String str = "";
+        StringBuilder str = new StringBuilder();
         int cnt = String.valueOf(number).length() - 1;
         while (cnt != -1){
             num = number / (int) Math.pow(10,cnt) * (int) Math.pow(10,cnt); //получение страшего разряда числа и заполнение нулями младших (Например 165: -> 100).
             number = number % (int) Math.pow(10,cnt); //новое число - старое число без страшего разряда (Например: 165 -> 65)
             for(RomanNumber romanNumber: RomanNumber.values()) { //нахождение римского обозначения для полученного числа(num)
                 if(romanNumber.inArabic() == num) {
-                    str = str + romanNumber.name();
+                    str.append(romanNumber.name());
                 }
             }
             cnt--;
         }
-        return str;
+        return str.toString();
     }
 }
