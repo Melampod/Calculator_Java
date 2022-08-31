@@ -23,9 +23,8 @@ class Number {
         }
     }
 
-
     public boolean checkRoman() {
-        RomanNumber mas[] = RomanNumber.values();
+        RomanNumber[] mas = RomanNumber.values();
         for(int i = 0; i < 10; i++){ // проверка является ли введенное число римским в диапазоне [1;10] и нахождение его значения в арабской системе счисления
             if(mas[i].toString().equals(operand)) {
                 this.value = mas[i].inArabic();
